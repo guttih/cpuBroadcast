@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>CPU Broadcast</Name>
+    <Version>1.0.0</Version>
+    <Title>CPU Broadcast Installer</Title>
+    <Publisher>guttih</Publisher>
+    <StartMenuDir>CPU Broadcast</StartMenuDir>
+    <TargetDir>@HomeDir@/cpuBroadcast</TargetDir>
+</Installer>
