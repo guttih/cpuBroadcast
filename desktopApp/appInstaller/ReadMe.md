@@ -7,7 +7,7 @@ Running bash or bat files to create the installer
 
 todo: Create a bash script which 
 1. Wipes the data directory
-2. builds the desktop app in release mode to a binary
+2. builds the desktop desktopApp in release mode to a binary
 3. Copies the desktop release  binary to the data folder
 4. Gets all application dependencies and copies them to the data directory
 5. Builds the installer application
@@ -16,7 +16,7 @@ todo: Create a bash script which
 
 todo: Create a bat script which 
 1. Wipes the data directory
-2. builds the desktop app in release mode to a binary
+2. builds the desktop desktopApp in release mode to a binary
 3. Copies the desktop release  binary to the data folder
 4. Gets all application dependencies and copies them to the data directory
    by running the `windeployqt.exe` on the `cpuBroadcast.exe` desktop binary
@@ -30,28 +30,28 @@ todo: Create a bat script which
 ### Linux installer
 
 What is needed to create a linux installer to 
-be used to deploy your app to linux users.
+be used to deploy your desktopApp to linux users.
 
 1. In terminal cd into root folder of the repository and clean data folder
     ```shell
     cd /home/gudjon/repos/personal/cpuBroadcast
     ```
-2. Build release version of the desktop app in Qt creator.
+2. Build release version of the desktop desktopApp in Qt creator.
     ```shell
-    ~/Qt/Tools/QtCreator/bin/qtcreator app/cpuBroadcast &
+    ~/Qt/Tools/QtCreator/bin/qtcreator desktopApp/cpuBroadcast &
     ```
-3. Clean the data directory and copy the linux release version of the desktop app to the directory installer data directory
+3. Clean the data directory and copy the linux release version of the desktop desktopApp to the directory installer data directory
     ```shell
-    rm -rf app/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data/*
-    mkdir -p app/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
-    cp app/build-cpuBroadcast-Desktop_Qt_6_2_4_GCC_64bit-Release/cpuBroadcast app/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
+    rm -rf desktopApp/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data/*
+    mkdir -p desktopApp/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
+    cp desktopApp/build-cpuBroadcast-Desktop_Qt_6_2_4_GCC_64bit-Release/cpuBroadcast desktopApp/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
     ```
 5. Build binary with linux package dependencies
 ```shell
 #todo:get https://github.com/probonopd/linuxdeployqt working, 
 # and probably need also https://github.com/OlivierLDff/QtLinuxCMake
 #Tried copying these files to workstation but it did not work, try something else
-cd app/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
+cd desktopApp/appInstaller/packageDir/packages/com.guttih.cpubroadcast/data
 cp /media/sf_gudjon/Qt/6.4.2/gcc_64/lib/libQt6Widgets.so.6 .
 cp /media/sf_gudjon/Qt/6.4.2/gcc_64/lib/libQt6Gui.so.6 .
 cp /media/sf_gudjon/Qt/6.4.2/gcc_64/lib/libQt6Core.so.6 .
@@ -66,14 +66,14 @@ cp /media/sf_gudjon/Qt/6.4.2/gcc_64/lib/libicudata.so.56 .
 
 6. Build the installer
     ```shell
-    ~/Qt/Tools/QtInstallerFramework/4.5/bin/binarycreator -c app/appInstaller/packageDir/config/config.xml -p app/appInstaller/packageDir/packages app/appInstaller/cpuBroadcastInstaller.run
+    ~/Qt/Tools/QtInstallerFramework/4.5/bin/binarycreator -c desktopApp/appInstaller/packageDir/config/config.xml -p desktopApp/appInstaller/packageDir/packages desktopApp/appInstaller/cpuBroadcastInstaller.run
 
     ```
 
 ### Windows installer
 
 What is needed to create a windows installer to 
-be used to deploy your app to windows users.
+be used to deploy your desktopApp to windows users.
 
 1. Open cmd and cd into root folder of the repository
     ```cmd
@@ -81,25 +81,25 @@ be used to deploy your app to windows users.
     ```
 2. Open *Qt Creator*
    ```cmd
-   C:\forrit\Qt\Tools\QtCreator\bin\qtcreator.exe "C:\Users\gutti\source\repos\cpuBroadcast\app\cpuBroadcast"
+   C:\forrit\Qt\Tools\QtCreator\bin\qtcreator.exe "C:\Users\gutti\source\repos\cpuBroadcast\desktopApp\cpuBroadcast"
    ```
-3. Build release version of the desktop app in Qt creator.
+3. Build release version of the desktop desktopApp in Qt creator.
 4. Clean the data directory
     ```cmd
-    rmdir /s /q "app\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
-    mkdir "app\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
+    rmdir /s /q "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
+    mkdir "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
     ```
-5. Copy the windows release version of the desktop app to the directory installer data directory
+5. Copy the windows release version of the desktop desktopApp to the directory installer data directory
 ```cmd
-copy "app\build-cpuBroadcast-Desktop_Qt_6_4_2_MinGW_64_bit-Release\cpuBroadcast.exe" "app\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
+copy "desktopApp\build-cpuBroadcast-Desktop_Qt_6_4_2_MinGW_64_bit-Release\cpuBroadcast.exe" "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
 ```
 6. Build binary with windows dependencies
 ```cmd
 C:\forrit\Qt\6.4.2\mingw_64\bin\qtenv2.bat
-cd C:\Users\gutti\source\repos\cpuBroadcast\app\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data
+cd C:\Users\gutti\source\repos\cpuBroadcast\desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data
 windeployqt.exe cpuBroadcast.exe
 ```
 7. Build the installer
 ```cmd
-C:\forrit\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator.exe -c app\appInstaller\packageDir\config\config.xml -p app\appInstaller\packageDir\packages app\appInstaller\cpuBroadcastInstaller.exe
+C:\forrit\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator.exe -c desktopApp\appInstaller\packageDir\config\config.xml -p desktopApp\appInstaller\packageDir\packages desktopApp\appInstaller\cpuBroadcastInstaller.exe
 ```
