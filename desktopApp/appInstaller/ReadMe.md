@@ -76,30 +76,37 @@ What is needed to create a windows installer to
 be used to deploy your desktopApp to windows users.
 
 1. Open cmd and cd into root folder of the repository
-    ```cmd
-    cd C:\Users\gutti\source\repos\cpuBroadcast
-    ```
+```cmd
+set WORK_DIR="C:\Users\gutti\source\repos\cpuBroadcast"
+set PACK_DIR="%WORK_DIR%\desktopApp\appInstaller\packageDir"
+```
 2. Open *Qt Creator*
-   ```cmd
-   C:\forrit\Qt\Tools\QtCreator\bin\qtcreator.exe "C:\Users\gutti\source\repos\cpuBroadcast\desktopApp\cpuBroadcast"
-   ```
+```cmd
+C:\forrit\Qt\Tools\QtCreator\bin\qtcreator.exe "%WORK_DIR%\desktopApp\cpuBroadcast"
+```
 3. Build release version of the desktop desktopApp in Qt creator.
 4. Clean the data directory
-    ```cmd
-    rmdir /s /q "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
-    mkdir "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
-    ```
+```cmd
+rmdir /s /q "%PACK_DIR%\packages\com.guttih.cpubroadcast\data"
+mkdir "%PACK_DIR%\packages\com.guttih.cpubroadcast\data"
+del "%WORK_DIR%\desktopApp\appInstaller\cpuBroadcastInstaller.exe"
+```
 5. Copy the windows release version of the desktop desktopApp to the directory installer data directory
 ```cmd
-copy "desktopApp\build-cpuBroadcast-Desktop_Qt_6_4_2_MinGW_64_bit-Release\cpuBroadcast.exe" "desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data"
+copy "%WORK_DIR%\desktopApp\build-cpuBroadcast-Desktop_Qt_6_4_2_MinGW_64_bit-Release\cpuBroadcast.exe" "%PACK_DIR%\packages\com.guttih.cpubroadcast\data"
 ```
 6. Build binary with windows dependencies
 ```cmd
 C:\forrit\Qt\6.4.2\mingw_64\bin\qtenv2.bat
-cd C:\Users\gutti\source\repos\cpuBroadcast\desktopApp\appInstaller\packageDir\packages\com.guttih.cpubroadcast\data
+cd "%PACK_DIR%\packages\com.guttih.cpubroadcast\data"
 windeployqt.exe cpuBroadcast.exe
 ```
 7. Build the installer
 ```cmd
-C:\forrit\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator.exe -c desktopApp\appInstaller\packageDir\config\config.xml -p desktopApp\appInstaller\packageDir\packages desktopApp\appInstaller\cpuBroadcastInstaller.exe
+cd "%PACK_DIR%"
+C:\forrit\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator.exe -c config\config.xml -p packages "..\cpuBroadcastInstaller.exe"
+```
+7. Run and test the installer
+```cmd
+"%WORK_DIR%\desktopApp\appInstaller\cpuBroadcastInstaller.exe"
 ```
